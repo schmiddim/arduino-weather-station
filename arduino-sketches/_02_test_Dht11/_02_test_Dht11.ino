@@ -1,7 +1,8 @@
 /**  
- *Found here http://www.hobbyist.co.nz/?q=documentations/wiring-up-dht11-temp-humidity-sensor-to-your-arduino
- *  
- *
+ * Found here http://www.hobbyist.co.nz/?q=documentations/wiring-up-dht11-temp-humidity-sensor-to-your-arduino
+ * Test your DHT11 with this sketch 
+ * open the Serial Monitor and connect with 9600 bauds. 
+ * You should see humidity  & temperature
 */
 #include <dht.h>
 
