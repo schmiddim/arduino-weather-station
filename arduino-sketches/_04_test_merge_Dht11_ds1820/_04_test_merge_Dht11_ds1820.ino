@@ -30,14 +30,18 @@ void loop(){
     DHT.read11(dht_dpin);  //Read from DHT11
     sensors.requestTemperatures(); // Read from DS1820
 
-    Serial.print("DHT 11 Current humidity = ");
-    Serial.print(DHT.humidity);
-    Serial.println("%  ");
-    Serial.print("DHT 11 temperature = ");
-    Serial.print(DHT.temperature); 
-    Serial.println("C  ");
-    Serial.print("DS1820 temperature = ");
-    Serial.print(sensors.getTempCByIndex(0) );
-    Serial.println("C ");
+    logValue("DHT11 ", DHT.humidity, " % humidity");
+    logValue("DHT11 ", DHT.temperature, " C temperature");
+    logValue("DS1820",sensors.getTempCByIndex(0) , " C temperature");
+   
+   
     delay(800);//Don't try to access too frequently... in theory
 }// end loop()
+
+
+void logValue(String SensorName, double value, String unit){
+  Serial.print(SensorName + " " );
+  Serial.print( value  );
+  Serial.print(" " + unit);
+  Serial.println("");
+}
