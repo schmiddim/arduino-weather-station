@@ -22,7 +22,6 @@ void setup(){
   sensors.begin();/* Initialize  Dallas Temperature library */
   sensors.setResolution(TEMP_12_BIT); // Set precision  12-Bit
   delay(700);//Wait rest of 1000ms recommended delay before
-  //accessing sensor
 }//end "setup()"
 
 void loop(){
