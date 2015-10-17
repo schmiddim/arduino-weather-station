@@ -1,0 +1,9 @@
+//SSID OF YOUR WLAN
+#define SSID "YOUR SSID";
+//Password for Your WLAN
+#define PASS "SECRET PASSWORD"
+//ip thingspeak.com
+#define IP "184.106.153.149" 
+//register on thingspeak, create an api channel and paste write key
+#define THING_SPEAK_API_KEY "WRITE_KEY"
+

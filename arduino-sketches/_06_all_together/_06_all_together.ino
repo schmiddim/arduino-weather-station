@@ -1,8 +1,16 @@
+/**
+*Merge _02_test_Dht11 & _01_test_03_ds1820
+* 
+*/
 
 #include "configuration.h"
 #include <SoftwareSerial.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <dht.h>
 
-
+#define ONE_WIRE_BUS 3 /* Digitalport D3  (Pin #2) definieren */
+#define dht_dpin A0 //DHT 11
 
 #define UPDATE "GET /update?key="
 #define PARAM1 "&field1="
@@ -10,24 +18,43 @@
 
 SoftwareSerial monitor(10, 11); // RX, TX
 
-void setup()
-{
+dht DHT;
+
+OneWire ourWire(ONE_WIRE_BUS); /* Ini oneWire instance */
+DallasTemperature sensors(&ourWire);/* Dallas Temperature Library für Nutzung der oneWire Library vorbereiten */
+
+
+void setup(){
   monitor.begin(9600);
-  Serial.begin(9600);
+  Serial.begin(9600);  
+  sensors.begin();/* Initialize  Dallas Temperature library */
+  sensors.setResolution(TEMP_12_BIT); // Set precision  12-Bit
   sendDebug("AT");
   delay(5000);
   if(Serial.find("OK")){
     monitor.println("RECEIVED: OK");
     connectWiFi();
-  }
-}
-
+  };
+  
+}//end "setup()"
 
 void loop(){
 
-    updateTemp("1", "2", "3");
+    DHT.read11(dht_dpin);  //Read from DHT11
+    sensors.requestTemperatures(); // Read from DS1820
+   
+    char buffer[10];
+    float tempC =(float) sensors.getTempFByIndex(0);
+    tempC = DallasTemperature::toCelsius(tempC);
+    String tempF = dtostrf(tempC, 4, 1, buffer);
+    String tempDht = dtostrf(DHT.temperature, 4, 1, buffer);
+    String humDht = dtostrf(DHT.humidity, 4, 1, buffer);
+   
+    updateTemp(tempF, tempDht, humDht);
+
     delay(60000);
-}
+}// end loop()
+
 
 void updateTemp(String tenmpF, String tempDht, String humDht){
   String cmd = "AT+CIPSTART=\"TCP\",\"";
