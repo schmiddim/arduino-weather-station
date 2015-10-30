@@ -7,3 +7,4 @@
 //register on thingspeak, create an api channel and paste write key
 #define THING_SPEAK_API_KEY "WRITE_KEY"
 
+#define BAUDRATE 9600

@@ -25,8 +25,8 @@ DallasTemperature sensors(&ourWire);/* Dallas Temperature Library für Nutzung d
 
 
 void setup(){
-  monitor.begin(9600);
-  Serial.begin(9600);  
+  monitor.begin(BAUDRATE);
+  Serial.begin(BAUDRATE);  
   sensors.begin();/* Initialize  Dallas Temperature library */
   sensors.setResolution(TEMP_12_BIT); // Set precision  12-Bit
   sendDebug("AT");
