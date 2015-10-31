@@ -6,4 +6,5 @@
 #define IP "184.106.153.149" 
 //register on thingspeak, create an api channel and paste write key
 #define THING_SPEAK_API_KEY "WRITE_KEY"
-
+//define the Baudrate for your ESP8266
+#define BAUDRATE 9600

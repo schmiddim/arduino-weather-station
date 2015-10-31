@@ -12,8 +12,8 @@ SoftwareSerial monitor(10, 11); // RX, TX
 
 void setup()
 {
-  monitor.begin(9600);
-  Serial.begin(9600);
+  monitor.begin(BAUDRATE);
+  Serial.begin(BAUDRATE);
   sendDebug("AT");
   delay(5000);
   if(Serial.find("OK")){
@@ -52,7 +52,7 @@ void updateTemp(String tenmpF, String tempDht, String humDht){
     monitor.print(">");
     monitor.print(cmd);
     Serial.print(cmd);
-  }else{
+  }else{  
     sendDebug("AT+CIPCLOSE");
   }
   if(Serial.find("OK")){
